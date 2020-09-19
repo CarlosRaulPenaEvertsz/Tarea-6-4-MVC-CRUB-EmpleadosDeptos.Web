@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Tarea6_4.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Registro Usuarios</h2>
+
+<div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registro de Usuarios</h4>
+            </div>
+
+            <div class="modal-body">
+                <div id="mostrar">
+                    Cargando...
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-mod-12">
+        <a id="btnNuevo" data-toggle="modal" href="#modalCreate" class="btn btn-success">Create New</a>
+    </div>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Apellido
+        </th>
+        <th>
+            Usuario
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>Opciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.IdUser }, new { @class = "glyphicon glyphicon-edit" })
+                @Html.ActionLink(" ", "Details", new { id = item.IdUser }, new { @class = "glyphicon glyphicon-th-list" })
+                @Html.ActionLink(" ", "Delete", new { id = item.IdUser }, new { @class = "glyphicon glyphicon-trash" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnNuevo').click(function (eve) {
+                $('#mostrar').load('/Users/Create');
+            });
+        });
+    </script>
+    }
+
